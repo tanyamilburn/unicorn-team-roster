@@ -1,4 +1,4 @@
-const generateHTML = ({ name, id, office, github, email, school }) =>
+const generateHTML = ({ managerName, managerID, office, managerEmail, engName,engEmail, github, engID, intName,intID, intEmail, school }) =>
   `<!DOCTYPE html>
   <html>
     <head>
@@ -19,28 +19,28 @@ const generateHTML = ({ name, id, office, github, email, school }) =>
         </p>
         <div class="columns">
           <div class="column card">
-              <div class="cardHeader">${name}
+              <div class="cardHeader">${managerName}
               <div> ☕️ Manager</div> 
           </div>
-              <div>ID:</div>
-              <div>Email:<a href="https://mail.google.com/mail/?view=cm&source=mailto&to=tanyamilbur@hotmail.com" target="_blank">tanyamilburn@hotmail.com</a></div>
-              <div>Office Number: </div>
+              <div>ID:${managerID}</div>
+              <div>Email:<a href="https://mail.google.com/mail/?view=cm&source=mailto&to=${managerEmail}" target="_blank">${managerEmail}</a></div>
+              <div>Office Number:${office} </div>
           </div>
           <div class="column card">
-              <div class="cardHeader">Name
+              <div class="cardHeader">${engName}
               <div>💻 Engineer</div> 
           </div>
-              <div>ID:</div>
-              <div>Email:</div>
-              <div>Github:<a href="https://github.com/tanyamilburn" target="_blank">GitHub</a> </div>
+              <div>ID:${engID}</div>
+              <div>Email:${engEmail}</div>
+              <div>Github:<a href="https://github.com/${github}" target="_blank">${github}</a> </div>
           </div>
           <div class="column card">
-              <div class="cardHeader">Name
+              <div class="cardHeader">${intName}
               <div>🎓 Intern</div> 
           </div>
-              <div>ID:</div>
-              <div>Email:</div>
-              <div>School:</div>
+              <div>ID:${intID}</div>
+              <div>Email:${intEmail}</div>
+              <div>School:${school}</div>
           </div>
       </div> 
     </section>
