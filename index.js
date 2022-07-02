@@ -1,17 +1,21 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./generateHTML.js')
+const Manager = require('./utils/manager.js')
+// const Engineer = require('./utils/engineer.js')
+// const Intern = require('./utils/intern.js')
 
+const teamArray =[]
 // Write const questions to run through
-const questions = [
+const managerQs = [
     {
         type: 'input',
-        name: 'managerName',
+        name: 'name',
         message: "Manager name?",
     },
     {
         type: 'input',
-        name: 'managerEmail',
+        name: 'email',
         message: 'What is his/her/their email address?',
     }, 
     {
@@ -21,17 +25,26 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'managerID',
+        name: 'id',
         message: 'What is his/her/their id number?',
+    },
+   
+]
+const employeeQs =[
+    {
+        type: 'list',
+        name: 'role',
+        message: "Please choose your employee's position",
+        choices: ['Engineer', 'Intern']
     },
     {
         type: 'input',
-        name: 'engName',
+        name: 'name',
         message: 'Engineer name?',
     },
     {
         type: 'input',
-        name: 'engEmail',
+        name: 'email',
         message: 'What is his/her/their email address?',
     }, 
     {   
@@ -41,37 +54,51 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'engID',
+        name: 'id',
         message: 'What is his/her/their id number?',
     },
-    {
-        type: 'input',
-        name: 'intName',
-        message: 'Intern name?',
-    },
-    {
-        type: 'input',
-        name: 'intEmail',
-        message: 'Intern email?',
-    }, 
     {   
         type: 'input',
         name: 'school',
         message: 'What school did they attend?',
     },
     {
-        type: 'input',
-        name: 'intID',
-        message: 'Intern id number?',
-    },]
+        type: 'confirm',
+        name: 'newEmployee',
+        message: 'Do you want to add another employee?',
+    },
+]
+     
 
 // write to file
-const init = () => {
-   inquirer.prompt(questions)
-      // Use writeFileSync method to use promises instead of a callback function
-      .then((answers) => fs.writeFileSync('index.html', generateHTML(answers)))
-      .then(() => console.log('Successfully wrote to index.html'))
-      .catch((err) => console.error(err));
+const getManagerInfo = () => {
+// let teamArray = []
+// function getManager(){
+    //    make manager/get object info
+   return inquirer.prompt(managerQs)
+   .then(managerInfo => {
+    const  { name, id, email, office } = managerInfo; 
+    const manager = new Manager (name, id, email, office);
+
+    teamArray.push(manager); 
+    console.log(manager); 
+})
+    // new function for adding employee
+const addEmployee = ()=> {
+    return inquirer.prompt(employeeQs)
+    .then(employeeInfo => {
+        const  { name, id, email, office } = employeeInfo; 
+        const employee = new Employee (name, id, email,)
+
+    })
+}
+    
+
   };
   
-  init();
+  getManagerInfo();
+// use answers to construct 
+// const write = async () => {
+//     await fs.appendFile("file.txt", 'abc')
+//   }
+//   write()

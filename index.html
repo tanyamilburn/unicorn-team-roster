@@ -1,5 +1,4 @@
-const generateHTML = ({ managerName, managerID, office, managerEmail, engName,engEmail, github, engID, intName,intID, intEmail, school }) =>
-  `<!DOCTYPE html>
+<!DOCTYPE html>
   <html>
     <head>
       <meta charset="utf-8">
@@ -19,12 +18,12 @@ const generateHTML = ({ managerName, managerID, office, managerEmail, engName,en
         </p>
         <div class="columns">
           <div class="column card">
-              <div class="cardHeader">${managerName}
+              <div class="cardHeader">Tanya Milburn
               <div> ☕️ Manager</div> 
           </div>
-              <div>ID:${managerID}</div>
-              <div>Email:<a href="https://mail.google.com/mail/?view=cm&source=mailto&to=${managerEmail}" target="_blank">${managerEmail}</a></div>
-              <div>Office Number:${office} </div>
+              <div>ID:123</div>
+              <div>Email:<a href="https://mail.google.com/mail/?view=cm&source=mailto&to=tanya@email.com" target="_blank">tanya@email.com</a></div>
+              <div>Office Number:1 </div>
           </div>
               <div class="column"></div>
               <div class="column"></div>
@@ -32,9 +31,4 @@ const generateHTML = ({ managerName, managerID, office, managerEmail, engName,en
     </section>
     <script src="index.js"></script>
     </body>
-  </html> `;
-
-module.exports = generateHTML
-
-
-
+  </html> 

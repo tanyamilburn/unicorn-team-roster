@@ -2,5 +2,8 @@
   "dependencies": {
     "bulma": "^0.9.4",
     "inquirer": "^8.2.4"
+  },
+  "scripts":{
+    "start": "node index"
   }
 }
