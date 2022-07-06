@@ -4,6 +4,7 @@ const generateHTML = require('./generateHTML.js')
 const Manager = require('./utils/manager.js')
 const Engineer = require('./utils/engineer.js')
 const Intern = require('./utils/intern.js')
+const Employee = require('./utils/employee.js')
 
 const teamArray =[]
 // Write const questions to run through
