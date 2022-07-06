@@ -2,8 +2,8 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./generateHTML.js')
 const Manager = require('./utils/manager.js')
-// const Engineer = require('./utils/engineer.js')
-// const Intern = require('./utils/intern.js')
+const Engineer = require('./utils/engineer.js')
+const Intern = require('./utils/intern.js')
 
 const teamArray =[]
 // Write const questions to run through
@@ -40,7 +40,12 @@ const employeeQs =[
     {
         type: 'input',
         name: 'name',
-        message: 'Engineer name?',
+        message: 'Employee name?',
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is his/her/their id number?',
     },
     {
         type: 'input',
@@ -51,30 +56,27 @@ const employeeQs =[
         type: 'input',
         name: 'github',
         message: 'What is his/her/their github username?',
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: 'What is his/her/their id number?',
+        when: (input) => input.role === "Engineer",
     },
     {   
         type: 'input',
         name: 'school',
         message: 'What school did they attend?',
+        when: (input) => input.role === "Intern",
     },
     {
         type: 'confirm',
-        name: 'newEmployee',
+        name: 'addNewEmployee',
         message: 'Do you want to add another employee?',
+        default: false,
     },
 ]
      
 
-// write to file
-const getManagerInfo = () => {
-// let teamArray = []
+
+const getManager = () => {
+
 // function getManager(){
-    //    make manager/get object info
    return inquirer.prompt(managerQs)
    .then(managerInfo => {
     const  { name, id, email, office } = managerInfo; 
@@ -83,22 +85,63 @@ const getManagerInfo = () => {
     teamArray.push(manager); 
     console.log(manager); 
 })
-    // new function for adding employee
+    
+
+};
+
+
+    // Add employee function
 const addEmployee = ()=> {
     return inquirer.prompt(employeeQs)
     .then(employeeInfo => {
-        const  { name, id, email, office } = employeeInfo; 
-        const employee = new Employee (name, id, email,)
+        // data for employee types 
 
+        let { name, id, email, role, github, school, addNewEmployee } = employeeInfo; 
+        let employee; 
+        if (role === "Engineer") {
+            employee = new Engineer (name, id, email, github);
+
+            console.log(employee);
+
+        } else if (role === "Intern") {
+            employee = new Intern (name, id, email, school);
+
+            console.log(employee);
+        }
+
+        teamArray.push(employee); 
+
+        if (addNewEmployee) {
+            return addEmployee(teamArray); 
+        } else {
+            return teamArray;
+        }
     })
+   
 }
-    
-
-  };
+  // write to file
+  // function to generate HTML page file using file system 
+const writeFile = data => {
+    fs.writeFile('./index.html', data, err => {
+        // if there is an error 
+        if (err) {
+            console.log(err);
+            return;
+        // when the profile has been created 
+        } else {
+            console.log("Your team roster is created!")
+        }
+    })
+}; 
   
-  getManagerInfo();
-// use answers to construct 
-// const write = async () => {
-//     await fs.appendFile("file.txt", 'abc')
-//   }
-//   write()
+  getManager()
+  .then(addEmployee)
+  .then(teamArray => {
+    return generateHTML(teamArray);
+  })
+  .then(HTMLpage => {
+    return writeFile(HTMLpage);
+  })
+  .catch(err => {
+ console.log(err);
+  });
