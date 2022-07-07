@@ -12,7 +12,7 @@
   * You will need to install npm and inquirer version 8.2.4 or lower.
 ### Usage
     
- ![App Image](/images/none)
+ 
     
 
   
