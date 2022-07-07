@@ -4,7 +4,7 @@ const generateHTML = require('./generateHTML.js')
 const Manager = require('./utils/manager.js')
 const Engineer = require('./utils/engineer.js')
 const Intern = require('./utils/intern.js')
-const Employee = require('./utils/employee.js')
+
 
 const teamArray =[]
 // Write const questions to run through
@@ -28,6 +28,12 @@ const managerQs = [
         type: 'input',
         name: 'id',
         message: 'What is his/her/their id number?',
+    },
+    {
+        type: 'confirm',
+        name: 'addNewEmployee',
+        message: 'Do you want to add another employee?',
+        default: false,
     },
    
 ]
