@@ -9,7 +9,7 @@ class Intern extends Employee{
         return "Intern";
       }
     getSchool() {
-        return school
+        return this.school
       }
   }
   module.exports = Intern;

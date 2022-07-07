@@ -1,9 +1,9 @@
-const { TestWatcher } = require('jest')
+
 const Employee = require('../utils/Employee')
 
 // test that we can actually create an Employee object
 
-TestWatcher('creates Employee object', () => {
+test('creates Employee object', () => {
    const employee = new Employee('Tanya', 1, 'tanyamilburn@hotmail.com'); 
     
     expect(employee.name).toEqual(expect.any(String));
